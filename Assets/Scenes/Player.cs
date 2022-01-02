@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    float steerSpeed = 0.1f;
+    float steerSpeed = 1f;
 
     [SerializeField]
     float moveSpeed = 0.01f;
@@ -19,7 +19,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(0, 0, steerSpeed);
-        this.transform.Translate(0, moveSpeed, 0);
+        float steerAmount = -1 * Input.GetAxis("Horizontal") * steerSpeed;
+        float moveAmount = Input.GetAxis("Vertical") * moveSpeed;
+
+        this.transform.Rotate(0, 0, steerAmount);
+        this.transform.Translate(0, moveAmount, 0);
     }
 }
