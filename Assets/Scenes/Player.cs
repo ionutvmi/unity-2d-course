@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float steerAmount = -1 * Input.GetAxis("Horizontal") * steerSpeed;
-        float moveAmount = Input.GetAxis("Vertical") * moveSpeed;
+        float steerAmount = -1 * Input.GetAxis("Horizontal") * steerSpeed * Time.deltaTime;
+        float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
         this.transform.Rotate(0, 0, steerAmount);
         this.transform.Translate(0, moveAmount, 0);
