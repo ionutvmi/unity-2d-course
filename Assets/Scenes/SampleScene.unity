@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 961594016}
   - component: {fileID: 961594018}
   - component: {fileID: 961594017}
+  - component: {fileID: 961594019}
   m_Layer: 0
   m_Name: Driver
   m_TagString: Untagged
@@ -342,6 +343,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &961594019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961594013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426425b1f03d8c74780babc904227d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1836338547
 GameObject:
   m_ObjectHideFlags: 0
