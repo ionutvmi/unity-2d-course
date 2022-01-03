@@ -19,10 +19,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float steerAmount = -1 * Input.GetAxis("Horizontal") * steerSpeed * Time.deltaTime;
-        float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        float horizAxis = Input.GetAxis("Horizontal");
+        if (horizAxis != 0)
+        {
+            float steerAmount = -1 * horizAxis * steerSpeed * Time.deltaTime;
+            this.transform.Rotate(0, 0, steerAmount);
+        }
 
-        this.transform.Rotate(0, 0, steerAmount);
-        this.transform.Translate(0, moveAmount, 0);
+        float verticalAxis = Input.GetAxis("Vertical");
+        if (verticalAxis != 0)
+        {
+            float moveAmount = verticalAxis * moveSpeed * Time.deltaTime;
+            this.transform.Translate(0, moveAmount, 0);
+        }
     }
 }
