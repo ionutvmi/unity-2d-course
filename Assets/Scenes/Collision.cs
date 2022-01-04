@@ -5,6 +5,8 @@ using UnityEngine;
 public class Collision : MonoBehaviour
 {
 
+    float destroyDelay = 0.5f;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collition detected.");
@@ -16,6 +18,8 @@ public class Collision : MonoBehaviour
         if (other.tag == "Package")
         {
             Debug.Log("Package picked up !");
+
+            Destroy(other.gameObject, destroyDelay);
         }
     }
 }

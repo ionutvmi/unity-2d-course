@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
         }
 
         float horizAxis = Input.GetAxis("Horizontal");
-        // only stear if the car is moving
+
+        // only steer if the car is moving
         if (horizAxis != 0 && verticalAxis != 0)
         {
             float steerAmount = -1 * horizAxis * steerSpeed * Time.deltaTime;
