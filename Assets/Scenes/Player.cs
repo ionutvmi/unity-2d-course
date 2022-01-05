@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,7 +9,16 @@ public class Player : MonoBehaviour
     float steerSpeed = 1f;
 
     [SerializeField]
-    float moveSpeed = 0.01f;
+    float moveSpeed = 7f;
+
+    [SerializeField]
+    float boostSpeed = 15f;
+
+    [SerializeField]
+    float normalMoveSpeed = 7f;
+
+    DateTime boostExpirationTime = DateTime.Now;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +29,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (DateTime.Now > this.boostExpirationTime)
+        {
+            this.moveSpeed = this.normalMoveSpeed;
+        } else
+        {
+            this.moveSpeed = this.boostSpeed;
+        }
+
         float verticalAxis = Input.GetAxis("Vertical");
         if (verticalAxis != 0)
         {
@@ -35,5 +54,13 @@ public class Player : MonoBehaviour
             this.transform.Rotate(0, 0, steerAmount);
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Boost")
+        {
+            this.boostExpirationTime = DateTime.Now.AddSeconds(30);
+        }
     }
 }
