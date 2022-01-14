@@ -10874,6 +10874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   torqueAmount: 15.8
+  boostSpeed: 30
+  baseSpeed: 15
 --- !u!114 &1486190650
 MonoBehaviour:
   m_ObjectHideFlags: 0
