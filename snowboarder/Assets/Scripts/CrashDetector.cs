@@ -11,11 +11,15 @@ public class CrashDetector : MonoBehaviour
     [SerializeField]
     ParticleSystem carshEffect;
 
+    [SerializeField]
+    AudioClip crashSFX;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ground")
         {
             carshEffect.Play();
+            GetComponent<AudioSource>().PlayOneShot(crashSFX);
             Invoke("ReloadScene", reloadDelay);
         }
     }
