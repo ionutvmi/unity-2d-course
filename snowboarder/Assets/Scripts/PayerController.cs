@@ -17,6 +17,8 @@ public class PayerController : MonoBehaviour
 
     SurfaceEffector2D surfaceEffector2D;
 
+    bool canMove = true;
+
     Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,11 @@ public class PayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
+        if (canMove)
+        {
+            RotatePlayer();
+            RespondToBoost();
+        }
 
     }
 
@@ -56,5 +61,10 @@ public class PayerController : MonoBehaviour
         {
             this.rb2d.AddTorque(-torqueAmount);
         }
+    }
+
+    public void DisableControls()
+    {
+        this.canMove = false;
     }
 }
