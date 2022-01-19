@@ -14,10 +14,13 @@ public class CrashDetector : MonoBehaviour
     [SerializeField]
     AudioClip crashSFX;
 
+    bool hasCrashed = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Ground")
+        if (other.tag == "Ground" && !hasCrashed)
         {
+            hasCrashed = true;
             FindObjectOfType<PayerController>().DisableControls();
             carshEffect.Play();
             GetComponent<AudioSource>().PlayOneShot(crashSFX);
