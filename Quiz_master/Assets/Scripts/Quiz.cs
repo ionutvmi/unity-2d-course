@@ -7,27 +7,45 @@ using UnityEngine.UI;
 public class Quiz : MonoBehaviour
 {
 
-    [SerializeField]
-    TextMeshProUGUI questionText;
+    [Header("Questions")]
+    [SerializeField] TextMeshProUGUI questionText;
 
-    [SerializeField]
-    QuestionSO question;
+    [SerializeField] QuestionSO question;
 
-    [SerializeField]
-    GameObject[] answerButtons;
+    [Header("Answers")]
+    [SerializeField] GameObject[] answerButtons;
+    bool hasAnsweredEarly;
 
     int correctAnswerIndex;
 
-    [SerializeField]
-    Sprite defaultAnswerSprite;
+    [Header("Button Colors")]
+    [SerializeField] Sprite defaultAnswerSprite;
 
-    [SerializeField]
-    Sprite correctAnswerSprite;
+    [SerializeField] Sprite correctAnswerSprite;
+
+    [Header("Timer")]
+    [SerializeField] Image timerImage;
+    Timer timer;
 
     void Start()
     {
+        timer = FindObjectOfType<Timer>();
         DisplayQuestion();
     }
+
+    void Update() {
+        timerImage.fillAmount = timer.fillFraction;
+
+        if (timer.loadNextQuestion) {
+            hasAnsweredEarly = false;
+            GetNextQuestion();
+            timer.loadNextQuestion = false;
+        } else if (!hasAnsweredEarly && !timer.isAnsweringQuestion) {
+            DisplayAnswer(-1);
+            SetButtonState(false);
+        }
+    }
+
 
     void GetNextQuestion()
     {
@@ -66,8 +84,7 @@ public class Quiz : MonoBehaviour
         }
     }
 
-    public void OnAnswerSelected(int index)
-    {
+    void DisplayAnswer(int index) {
         correctAnswerIndex = question.GetCorrectAnswerIndex();
 
         if (index == correctAnswerIndex)
@@ -82,7 +99,14 @@ public class Quiz : MonoBehaviour
             Image buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
         }
+    }
+
+    public void OnAnswerSelected(int index)
+    {
+        hasAnsweredEarly = true;
+        DisplayAnswer(index);
         SetButtonState(false);
+        timer.CancelTimer();
     }
 
 }
