@@ -10,7 +10,8 @@ public class Quiz : MonoBehaviour
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
 
-    [SerializeField] QuestionSO question;
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    QuestionSO currentQuestion;
 
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
@@ -51,17 +52,23 @@ public class Quiz : MonoBehaviour
     {
         SetButtonState(true);
         SetDefaultButtonSprites();
+        GetRandomQuestion();
         DisplayQuestion();
+    }
+
+    void GetRandomQuestion() {
+        int index = Random.Range(0, questions.Count);
+        currentQuestion = questions[index];
     }
 
     void DisplayQuestion()
     {
-        this.questionText.text = question.GetQuestion();
+        this.questionText.text = currentQuestion.GetQuestion();
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
             TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = question.GetAnswer(i);
+            buttonText.text = currentQuestion.GetAnswer(i);
         }
         SetButtonState(true);
     }
@@ -85,7 +92,7 @@ public class Quiz : MonoBehaviour
     }
 
     void DisplayAnswer(int index) {
-        correctAnswerIndex = question.GetCorrectAnswerIndex();
+        correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
 
         if (index == correctAnswerIndex)
         {
