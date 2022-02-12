@@ -605,7 +605,7 @@ MonoBehaviour:
   defaultAnswerSprite: {fileID: 21300000, guid: 11e822b118a4e3b46854aca70dd54940, type: 3}
   correctAnswerSprite: {fileID: 21300000, guid: 5a388acc543c24943a59b9bae143a1c0, type: 3}
   timerImage: {fileID: 1927572483}
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 843539663}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
